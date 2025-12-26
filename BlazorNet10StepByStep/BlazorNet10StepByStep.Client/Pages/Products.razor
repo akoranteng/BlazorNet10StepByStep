@@ -1,0 +1,27 @@
+﻿@page "/products"
+@inject ProductService ProductService
+
+<h3>Product List</h3>
+
+@if (products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var product in products)
+        {
+            <li>@product.Name - @product.Price</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Product> products;
+
+    protected override void OnInitialized()
+    {
+        products = ProductService.GetProducts();
+    }
+}
